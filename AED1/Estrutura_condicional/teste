@@ -1,0 +1,39 @@
+#include <iostream>
+using namespace std;
+int main()
+{
+  int a,b,resultado;
+  
+  a=0;
+  b=0;
+  resultado=0;
+  
+  cout<<"Digite um numero de 1 a 9"<<endl;
+  do{
+     cout<<"O número informado não está entre 1 e 9! Não permitido\n";
+     cin>>a
+    }
+    while(a>9);
+  cin>>a;
+  cout<<"Digite outro número diferente do primeiro informado e de 1 a 9:\n";
+  do{
+     cout<<"O número que você informou ou é igual ao primeiro número ou é maior que 9! Não permitido
+     cin>>b;
+    }
+    while(b>9 && b!=a);
+
+ /* if(a!=b)
+     resultado= a+b;
+     
+  else
+  {        
+    do{
+        cout<<"Os numeros são iguais, digite outro numero!"<<endl;
+        cin>>b;
+      }
+      while (a==b);
+      resultado=a+b;
+  }*/  
+  cout<<"O resultado da soma é "<<a<<endl;
+
+}
