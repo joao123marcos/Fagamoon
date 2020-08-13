@@ -1,543 +1,437 @@
-#include <iostream>
+//AULA DE AED2 E LAB2 - 28/04/2020 - PROFA. CRIS 
+//LINK PARA O VIDEO DA AULA DE AED https://drive.google.com/file/d/1A-mfCntfb7Otjhg6PM-3C8glp_7dcRHq/view?usp=sharing
+//LINK PARA O VIDEO DA AULA DE LAB https://drive.google.com/file/d/1CoTqrq8AHyZk9NYDuuXiMqh0fCJraYz8/view?usp=sharing
+
+// ESTRUTURA DE DADOS LISTA ENCADEADA
+
+#include<iostream>
 using namespace std;
 
-struct no
+struct tipoNo
 {
-  int elemento;
-  no *ponteiroParaProximoNo;
+	int item;
+	tipoNo *prox;
 };
-
-struct corpoLista
+struct tipoLista
 {
-  no *PrimeiroNo;
-  no *UltimoNo;
-};
-
-void CrialistaVazia(corpoLista &lista) //deve ser passada por referencia pois sua modificação deve ser mostrada no programa principal (main)
+	tipoNo *primeiro;
+	tipoNo *ultimo;
+};	
+/*procedimento inicializaLista(var lista: tipoLista);
+inicio
+	inicializaPonteiro(lista.primeiro);  // lista.primeiro = new tipoNo;
+	lista.ultimo = lista.primeiro;
+	lista.ultimo->prox = nulo;
+fim;
+*/
+void inicializaLista(tipoLista &lista)
 {
-  lista.PrimeiroNo = new no();  //Alocando dinâmicamente um nó para manipula-lo mais tarde
-  lista.UltimoNo = lista.PrimeiroNo; //estou fazendo ultimos e primeiros apontarem para 
-                                //a mesma posição de memoria.
-  lista.UltimoNo-> ponteiroParaProximoNo = NULL; 
-  //Como por enquanto este é o último elemento da lista o mesmo deve apontar para Null, 
-  //indicando o fim da lista.
+	lista.primeiro = new tipoNo;
+	lista.ultimo = lista.primeiro;
+	lista.ultimo->prox = NULL;
+}
+/*
+procedimento insereNoFim(var lista: tipoLista; x: inteiro);
+inicio
+	inicializaPonteiro(lista.ultimo->prox); // lista.ultimo->prox = new tipoNo;
+	lista.ultimo = lista.ultimo->prox;
+	lista.ultimo->item = x;
+	lista.ultimo->prox = nulo;
+fim;
+*/
+void insereNoFim(tipoLista &lista, int x)
+{
+	lista.ultimo->prox = new tipoNo;
+	lista.ultimo = lista.ultimo->prox;
+	lista.ultimo->item = x;
+	lista.ultimo->prox = NULL;
 }
 
-void insereNoFim(corpoLista &lista, int x)
+/*
+fun��o listaVazia(lista: tipoLista): l�gico;
+inicio
+	se(lista.primeiro == lista.ultimo) ent�o
+		retorna verdadeiro;
+	sen�o
+		retorna falso;
+	fim-se;
+fim;
+*/
+
+bool listaVazia(tipoLista lista)
 {
-  lista.UltimoNo-> ponteiroParaProximoNo = new no(); //Criando um novo nó
-  lista.UltimoNo = lista.UltimoNo-> ponteiroParaProximoNo;// Atualizando meu ponteiro ultimo para ir para o proximo nó.
-  lista.UltimoNo-> elemento = x; //recebendo o número digitado pelo usuario no campo ELEMENTO
-  lista.UltimoNo-> ponteiroParaProximoNo = NULL;
+	if(lista.primeiro == lista.ultimo)
+		return true;
+	else
+		return false;
 }
 
-bool verificaStatusLista(corpoLista lista)
+/*
+procedimento imprimeLista(lista: tipoLista);
+declare
+	aux: ponteiro para tipoNo;
+inicio
+	se(listaVazia(lista)) ent�o
+		escreva("A lista estah vazia");
+	sen�o
+		aux = lista.primeiro->prox;
+		enquanto (aux != NULL) fa�a
+			escreva(aux->item);
+			aux = aux->prox; 
+		fim-enquanto;
+	fim-se;
+fim;
+*/
+void imprimeLista(tipoLista lista)
 {
-  if (lista.PrimeiroNo == lista.UltimoNo)
-  {
-    return true ;//Então a lista está vazia
-  }
-  else
-  {
-    return false;
-  }
+	tipoNo *aux;
+	if(listaVazia(lista) == true)
+		cout << "Lista vazia" << endl;
+	else
+	{
+		aux = lista.primeiro->prox;
+		while(aux != NULL)
+		{
+			cout << aux->item << " ";
+			aux = aux->prox;
+		}
+		cout << endl;
+	}
+	delete aux;
 }
 
-int somatorioElementosLista(corpoLista lista)
+/*procedimento buscaNalistaProc(lista:tipoLista; n: inteiro);
+declare
+	aux: ponteiro para tipoNo;
+	achou: l�gico;
+inicio
+	achou = false;
+	se(listaVazia(lista) == falso) ent�o
+		aux = lista.primeiro->prox;
+		enquanto (aux != nulo) fa�a
+			se (aux->item == n) ent�o
+				achou = verdadeiro;
+			fim-se;
+			aux = aux->prox;
+		fim-enquanto;
+		
+		se (achou == verdadeiro) ent�o
+			escreva("Elemento encontrado" );
+		sen�o
+			escreva("Elemento n�o encontrado");
+		fim-se;
+	fim-se;
+fim;
+*/
+void buscaNaListaProc(tipoLista lista, int n)
 {
-  if (verificaStatusLista(lista) == false)
-  {
-    no *aux;
-    int somatorio = 0;
-
-    aux = lista.PrimeiroNo-> ponteiroParaProximoNo;
-    while (aux != NULL)
-    {
-      somatorio = somatorio + aux-> elemento;
-      aux = aux-> ponteiroParaProximoNo;
-    }
-
-    delete aux;
-    return somatorio;
-  }
-
-  else
-  {
-    return 0;
-  }
+	tipoNo *aux;
+	bool achou;
+	achou = false;
+	if(listaVazia(lista) == false) 
+	{
+		aux = lista.primeiro->prox;
+		while(aux != NULL) 
+		{
+			if(aux->item == n) 
+				achou = true;
+			aux = aux->prox;
+		}
+		if (achou == true) 
+			cout << "Elemento encontrado" << endl;
+		else
+			cout << "Elemento nao encontrado" << endl;
+	}
 }
 
-void insereNoInicio(corpoLista &lista, int x)
+
+
+/* Fun��o que busca na lista e retorna verdadeiro ou falso
+fun��o buscaNalistaFuncBool(lista:tipoLista; n: inteiro): l�gico;
+declare
+	aux: ponteiro para tipoNo;
+inicio
+	se(listaVazia(lista) == falso) ent�o
+		aux = lista.primeiro->prox;
+		enquanto (aux != nulo) fa�a
+			se (aux->item == n) ent�o
+				retorna verdadeiro;
+			fim-se;
+			aux = aux->prox;
+		fim-enquanto;
+	fim-se;
+	retorna falso;
+fim;
+*/
+
+bool buscaNaListaFuncBool(tipoLista lista, int n)
 {
-  no *recebePonteiro, *aux;
-
-  if (verificaStatusLista(lista))//Verifica se a lista está vazia
-  {
-    lista.UltimoNo-> ponteiroParaProximoNo = new no(); //Criando um novo nó
-    lista.UltimoNo = lista.UltimoNo-> ponteiroParaProximoNo;// Atualizando meu ponteiro ultimo para ir para o proximo nó.
-    lista.UltimoNo-> elemento = x; //recebendo o número digitado pelo usuario no campo ELEMENTO
-    lista.UltimoNo-> ponteiroParaProximoNo = NULL;
-  }
-  else
-  {
-    recebePonteiro = lista.PrimeiroNo-> ponteiroParaProximoNo;
-   /*Estou guardando o ponteiro porque quando eu der o NEW para criar um novo nó eu não posso perder
-    a referencia do nó já criado por causa do IF */
-
-    lista.PrimeiroNo-> ponteiroParaProximoNo = new no();// Criei o novo nó
-    aux = lista.PrimeiroNo-> ponteiroParaProximoNo;
-    aux-> elemento = x;
-    aux-> ponteiroParaProximoNo = recebePonteiro; 
-    
-  }
+	tipoNo *aux;
+	
+	if(listaVazia(lista) == false) 
+	{
+		aux = lista.primeiro->prox;
+		while (aux != NULL)
+		{
+			if (aux->item == n) 
+				return true;
+			aux = aux->prox;
+		}
+	}
+	return false;
 }
 
-void procuraElementoNaLista(corpoLista lista, int z)
+/* Fun��o que busca na lista e retorna a posi��o do elemento.
+fun��o buscaNaListaFuncPos(lista:tipoLista; n: inteiro): inteiro;
+declare
+	aux: ponteiro para tipoNo;
+	cont: inteiro;
+inicio
+	cont = 0;
+	se(listaVazia(lista) == falso) ent�o
+		aux = lista.primeiro->prox;
+		enquanto (aux != nulo) fa�a
+			cont = cont + 1;
+			se (aux->item == n) ent�o	
+				retorna cont;
+			fim-se;
+			aux = aux->prox;
+		fim-enquanto;
+	fim-se;
+	retorna cont;
+fim;
+*/
+
+int buscaNaListaFuncPos(tipoLista lista, int n)
 {
-  no *PonteiroPercorreLista;
-  bool achou = false;
+	tipoNo *aux;
+	int cont;
 
-  if (verificaStatusLista(lista) == false)
-  {
-    PonteiroPercorreLista = lista.PrimeiroNo-> ponteiroParaProximoNo;
-    while (PonteiroPercorreLista != NULL)
-    {
-      if (PonteiroPercorreLista-> elemento == z)
-      {
-        achou = true;
-      }
-      PonteiroPercorreLista = PonteiroPercorreLista-> ponteiroParaProximoNo;
-    }
-  }
-
-  if (achou == true)
-  {
-    cout<<"Elemento encontrado na lista!"<<endl;
-  }
-  else
-  {
-    cout<<"Elemento não encontrado na lista!"<<endl;
-  }
+	cont = 0;
+	if(listaVazia(lista) == false) 
+	{
+		aux = lista.primeiro->prox;
+		while (aux != NULL)
+		{
+			cont = cont + 1;
+			if (aux->item == n) 
+			{
+				return cont;
+			}
+			aux = aux->prox;
+		}
+	}
+	return cont;
 }
 
-bool FuncaoprocuraElementosNaLista(corpoLista lista, int z, int &cont) 
+
+/*fun��o somaElementosDaLista(lista: tipoLista): inteiro;
+declare
+	aux: ponteiro para n�;
+	soma: inteiro;
+inicio
+	soma = 0;
+	se (listaVazia(lista) == falso) ent�o
+		aux = lista.primeiro->prox;
+		enquanto (aux != nulo) fa�a
+			soma = soma + aux->item;
+			aux = aux->prox;
+		fim-enquanto;
+		retorna soma;	
+	sen�o
+		retorna 0;		
+	fim-se;
+fim;
+*/
+
+int somaElementosDaLista(tipoLista lista)
 {
-  no *PonteiroPercorreLista;
-  cont = 0;
+	tipoNo *aux;
+	int soma;
+
+	soma = 0;
+	if (listaVazia(lista) == false) 
+	{
+		aux = lista.primeiro->prox;
+		while (aux != NULL) 
+		{
+			soma = soma + aux->item;
+			aux = aux->prox;
+		}
+		return soma;	
+	}
+	else
+		return 0;		
+}
+
+/*
+fun��o removePrimeiro(var lista:tipoLista): inteiro;
+declare
+	aux: ponteiro para n�;
+	num: inteiro;
+inicio
+	se(listaVazia(lista) == verdadeiro) ent�o
+		retorna 0;
+	sen�o
+		lista.primeiro = lista.primeiro->prox;
+		num = lista.primeiro->item;
+		return num;
+	fim-se;
+fim;
+*/
+
+
+int removePrimeiro(tipoLista &lista)
+{
+	tipoNo *aux;
+	int num;
+
+	if(listaVazia(lista) == true)
+		return 0;
+	else
+	{
+		lista.primeiro = lista.primeiro->prox;
+		num = lista.primeiro->item;
+		return num;
+	}
+}
+
+/*procedimento insereNaPosicao(var lista: tipoLista; n: inteiro; pos: inteiro);
+declare
+	aux1, aux2: ponteiro para tipoNo;
+	cont: inteiro;
+inicio
+	se (listaVazia(lista) == verdadeiro) ent�o
+		insereNoFim(lista, n);
+		escreva("Posicao nao existe. Elemento inserido na lista na primeira posicao");
+	sen�o
+		aux1 = lista.primeiro->prox;
+		para cont de 1 at� pos-1 fa�a
+			aux = aux->prox;
+		fim-para;
+		aux2 = new tipoNo;
+		aux2->item = n;
+		aux2->prox = aux1->prox;
+		aux1->prox = aux2;
+		escreva("elemento inserido");
+	fim-se;
+fim;
+*/
+
+void insereNaPosicao(tipoLista &lista, int n, int pos)
+{
+  tipoNo *aux1, *aux2;
+  int cont;
   
-  if (verificaStatusLista(lista) == false)
+  if (listaVazia(lista) == true)
   {
-    PonteiroPercorreLista = lista.PrimeiroNo-> ponteiroParaProximoNo;
-    while (PonteiroPercorreLista != NULL)
-    {
-      if (PonteiroPercorreLista-> elemento == z)
-      {
-        cont++;
-        return true;
-      }
-      cont++;
-      PonteiroPercorreLista = PonteiroPercorreLista-> ponteiroParaProximoNo;
-    }
-  }
-  return false;
-}
-
-int imprimeLista(corpoLista lista) 
-{
-  no *ImprimiLista;
-  bool StatusDaLista = false;
-
-  StatusDaLista = verificaStatusLista(lista);
-  if (StatusDaLista == true)
-  {
-    cout<<"Não foi possivel imprimir a lista pois a mesma se encontra vazia!";
-    return  0;
+    insereNoFim(lista, n);
+    cout<<"Posicao nao existe. Elemento inserido na lista na primeira posicao";
   }
 
-  else
-  {
-  //Recebendo o primeiro ponteiro que aponta para o proximo nó que tem elemento
-  ImprimiLista = lista.PrimeiroNo-> ponteiroParaProximoNo;
-  cout<<"Imprimindo a lista!"<<endl;
-  while (ImprimiLista != NULL)
-  {
-    cout<<ImprimiLista-> elemento<<" ";
-    ImprimiLista = ImprimiLista->ponteiroParaProximoNo;
-  }
-  return 1;
-  delete ImprimiLista;
-  /* 
-  {Uma outra maniera de implementar a função de imprimir a lista
-   
-   no *aux;
-   if(verificaStatusLista(lista)) Nesta forma simplificada ele já verifica se o resultado deste if é verdadeiro
+ else
+ {
+   aux1 = lista.primeiro->prox;
+   for(cont = 1; cont < (pos-1); cont++)
    {
-     cout<<"A lista está vazia"
+       aux1 = aux1->prox;
    }
-   else
-   {
-     aux = lista.PrimeiroNo-> ponteiroParaProximoNo;
-     cout<<"Imprimindo a lista!"<<endl;
-     while (aux != NULL)
-     {
-       cout<<aux-> elemento<<" ";
-       aux = aux->ponteiroParaProximoNo;
-     }
-     cout<<endl;
-    }
-  }*/
-  }
+   aux2 = new tipoNo;
+   aux2->item = n;
+   aux2->prox = aux1->prox;
+   aux1->prox = aux2;
+   cout<<"elemento inserido";
+ }
+
 }
 
-void RemovePrimeiroElementoDaLista(corpoLista &lista)
+int main()
 {
-  if (verificaStatusLista(lista) == true)
-  {
-    cout<<"Lista vazia! "<<endl;
-  }
-
-  else
-  {
-    int numero = 0;
-    no *aux;
-
-    aux = lista.PrimeiroNo-> ponteiroParaProximoNo;
-    numero = aux-> elemento;
-    
-    //avançando o ponteiro primeiro para frente
-    lista.PrimeiroNo = lista.PrimeiroNo-> ponteiroParaProximoNo;
-    imprimeLista(lista);
-
-    cout<<endl;
-    cout<<endl;
-    cout<<"O primeiro elemento da lista removido "<<numero<<endl;
-  }
-  cout<<"Novo somatorio da lista após a remoção do elemento é "<<somatorioElementosLista(lista)<<endl;
+	tipoLista listaEncadeada;
+	int num, opcao, posicao;
+	
+	inicializaLista(listaEncadeada);
+	
+	do{
+		cout << "\n\n\n1 - Inserir no fim da lista" << endl;
+		cout << "2 - Imprimir a lista " << endl;
+		cout << "3 - Buscar um elemento na lista (procedimento)" << endl;
+		cout << "4 - Buscar um elemento na lista (funcao - verdadeiro ou falso)" << endl;
+		cout << "5 - Buscar um elemento na lista (funcao - retorna posicao)" << endl;
+		cout << "6 - Somar os elementos da lista " << endl;
+		cout << "7 - Remover o primeiro elemento " << endl;
+		cout << "8 - Inserir um elemento numa dada posicao " << endl;
+		cout << "0 - Sair " << endl;
+		cout << "Digite sua opcao: " ;
+		cin >> opcao;
+		switch(opcao)
+		{
+			case 1: 
+				cout << "Digite um numero ou zero para finalizar: ";
+				cin >> num;
+				while(num != 0)
+				{
+					insereNoFim(listaEncadeada, num);
+					cout << "Digite um numero ou zero para finalizar: ";
+					cin >> num;
+				}
+				cout << "Lista preenchida: ";
+				break;
+			case 2:
+				imprimeLista(listaEncadeada);
+				break;
+			case 3:					
+				cout << "Informe um elemento para ser buscado na lista: ";
+				cin >> num;
+				buscaNaListaProc(listaEncadeada, num);
+				break;
+			case 4:
+				cout << "Informe um elemento para ser buscado na lista: ";
+				cin >> num;
+				if(buscaNaListaFuncBool(listaEncadeada, num) == true)
+					cout << "Elemento encontrado" << endl;
+				else
+					cout << "Elemento nao encontrado " << endl;
+				break;
+			case 5:
+				cout << "Informe um elemento para ser buscado na lista: ";
+				cin >> num;
+				num = buscaNaListaFuncPos(listaEncadeada, num);
+				if(buscaNaListaFuncPos(listaEncadeada, num) != 0)
+					cout << "Elemento encontrado na posicao " << num << endl;
+				else
+					cout << "Elemento nao encontrado " << endl;
+				break;
+			case 6:
+				cout << "\nSoma dos elementos da lista: " << somaElementosDaLista(listaEncadeada) << endl;
+				break;
+			case 7: 
+				cout << "\nPrimeiro elemento removido: " << removePrimeiro(listaEncadeada) << endl;
+				break;
+			case 8: 
+				cout << "\nElemento a ser inserido na lista: ";
+                cin>>num;
+                cout<<endl;
+                cout<<"\nEm qual posição quer inserir: ";
+                cin>>posicao;
+                insereNaPosicao(listaEncadeada, num, posicao);
+				break;
+            case 0:
+			cout << "Tchau" << endl;
+			
+			default:
+				cout << "Opcao incorreta" << endl;
+		}
+	}while(opcao != 0);
+		
+	return 0;
 }
+	
+	
+	
+	
+	
+	
+	
 
-void InsereEmQualquerPosicao(corpoLista &lista, int posicao, int x)
-{
-  if (verificaStatusLista(lista))
-  {
-    cout<<"Lista vazia!";
-  }
 
-  else
-  {
-    int cont = 0;
-    no *aux, *aux2;
-
-    aux= lista.PrimeiroNo;
-    for (cont = 1; cont < posicao; cont++)
-    {
-      aux= aux-> ponteiroParaProximoNo;
-    }
-    
-    aux2 = new no();
-    aux2-> elemento = x;
-    aux2-> ponteiroParaProximoNo = aux-> ponteiroParaProximoNo;
-    aux-> ponteiroParaProximoNo = aux2;
-    imprimeLista(lista);
-    delete aux, aux2;
-  }
-}
-
-int contaElementosLista(corpoLista lista)
-{
-  no *aux;
-  int cont = 0;
-  
-  if (verificaStatusLista(lista) == false)
-  {
-    aux = lista.PrimeiroNo-> ponteiroParaProximoNo;
-    while (aux != NULL)
-    {
-      cont++;
-      aux = aux-> ponteiroParaProximoNo;
-    }
-    return cont;
-  }
-  else
-  {
-    return cont;
-  }
-}
-
-void devolvePosicaoNaLista(corpoLista lista, int z)
-{
-  if (verificaStatusLista(lista))
-  {
-    cout<<"A lista está vazia! "<<endl;
-  }
-  
-  else
-  {
-    int QtdPosicaoLista = 0, cont = 0;
-    no *aux;
-    
-    aux = lista.PrimeiroNo;
-    QtdPosicaoLista = contaElementosLista(lista);
-    
-    if (z > QtdPosicaoLista)
-    {
-      cout<<"Usuário, a posição que você passou está além da lista"<<endl;
-    }
-
-    else
-    {
-      for ( cont = 1; cont <= z; cont++)
-      {
-        aux= aux->ponteiroParaProximoNo;
-      }
-      cout<<"Na posição "<<z<<", que voçê digitou, está o elemento "<<aux->elemento<<endl;
-    }
-  }
-  
-}
-
-void ListaParImpar(corpoLista lista)
-{
-  if (verificaStatusLista(lista))
-  {
-    cout<<"Não existe Par nem Impar numa lista vazia, programa finalizado!"<<endl;
-  }
-  
-  else
-  {
-    corpoLista ListaPar, ListaImpar;
-    no *aux, *ImprimiLista;
-    
-    aux = lista.PrimeiroNo-> ponteiroParaProximoNo;
-    
-    CrialistaVazia(ListaPar);
-    CrialistaVazia(ListaImpar);
-    
-    while (aux != NULL)
-    {
-      if (aux-> elemento % 2 == 0)
-      {
-        insereNoFim(ListaPar, aux-> elemento);
-      }
-
-      else
-      {
-        insereNoFim(ListaImpar, aux-> elemento);
-      }
-      aux = aux->ponteiroParaProximoNo;
-    }
-    
-    ImprimiLista = ListaPar.PrimeiroNo-> ponteiroParaProximoNo;
-    cout<<"Imprimindo a lista Par!"<<endl;
-    while (ImprimiLista != NULL)
-    {
-      cout<<ImprimiLista-> elemento<<" ";
-      ImprimiLista = ImprimiLista->ponteiroParaProximoNo;
-    }
-    cout<<endl;
-    
-    ImprimiLista = ListaImpar.PrimeiroNo-> ponteiroParaProximoNo;
-    cout<<"Imprimindo a lista Impar!"<<endl;
-    while (ImprimiLista != NULL)
-    {
-      cout<<ImprimiLista-> elemento<<" ";
-      ImprimiLista = ImprimiLista->ponteiroParaProximoNo;
-    }
-    cout<<endl;
-    delete ImprimiLista;
-  }
-}
-
-void IntercalaLista(corpoLista x, corpoLista y)
-{
-  if ( (verificaStatusLista(x)) && (verificaStatusLista(y)) )
-  {
-    cout<<"Uma das lista, ou as duas, estão vazias; por isso não há como fazer a intercalação."<<endl;
-  }
-
-  else
-  {
-    corpoLista listaIntercalada;
-    no *percorreLista1, *percorreLista2, *ImprimiLista;
-
-    cout<<"Lista que receberá a intercalação criada com sucesso!"<<endl;
-    CrialistaVazia(listaIntercalada);
-
-    percorreLista1 = x.PrimeiroNo-> ponteiroParaProximoNo;
-    percorreLista2 = y.PrimeiroNo-> ponteiroParaProximoNo;
-
-    while (percorreLista1 != NULL || percorreLista2 != NULL)
-    {
-      if (percorreLista1 != NULL)
-      {
-        insereNoFim(listaIntercalada, percorreLista1-> elemento);
-        percorreLista1 = percorreLista1-> ponteiroParaProximoNo;
-      }
-
-      if (percorreLista2 != NULL)
-      {
-        insereNoFim(listaIntercalada, percorreLista2-> elemento);
-        percorreLista2 = percorreLista2-> ponteiroParaProximoNo;
-      }
-    }
-
-    ImprimiLista = listaIntercalada.PrimeiroNo-> ponteiroParaProximoNo;
-    cout<<"Imprimindo a lista intercalada!"<<endl;
-    while (ImprimiLista != NULL)
-    {
-      cout<<ImprimiLista-> elemento<<" ";
-      ImprimiLista = ImprimiLista-> ponteiroParaProximoNo;
-    }
-    delete ImprimiLista;
-  }
-  cout<<endl;
-}
-
-main()
-{
-  int numero = 0, escolha = 0;
-  corpoLista lista;
-
-  CrialistaVazia(lista);
-  cout<<"Lista vazia criada com sucesso!"<<endl;
-  do
-  {
-    cout<<" 1 - Insere no Fim da lista! "<<endl;
-    cout<<" 2 - Insere no Inicio da lista! "<<endl;
-    cout<<" 3 - Imprime  lista! "<<endl;
-    cout<<" 4 - Renorna o somatorio dos elementos da lista! "<<endl;
-    cout<<" 5 - Procura um elemento na lista (Procedimento)! "<<endl;
-    cout<<" 6 - Procura um elemento na lista (Função)! "<<endl;
-    cout<<" 7 - Remove o Primeiro elemento da lista! "<<endl;
-    cout<<" 8 - Conta quantos elementos tem a lista! "<<endl;
-    cout<<" 9 - Retorna o número que estiver na posição que você escolher! "<<endl;
-    cout<<"10 - Insere elementos em uma determinada posição da lista! "<<endl;
-    cout<<"11 - Divide a lista em pares e impares! "<<endl;
-    cout<<"12 - Intercala duas listas! "<<endl;
-    cout<<"13 - Reinicia a lista! "<<endl;
-    cout<<" 0 - Sair! "<<endl;
-    cout<<"Digite sua opção ";
-    cin>>escolha;
-    
-    switch (escolha)
-    {
-      case 1:
-      cout<<"Usuário, por favor digite um número ou zero para finalizar: ";
-      cin>>numero;
-      while (numero != 0)
-      {
-        insereNoInicio(lista,numero);
-        cout<<"Usuário, por favor digite um número ou zero para finalizar: ";
-        cin>>numero;
-      }
-      cout<<"Lista preenchida!"<<endl;
-      break;
-    /////////////////////////////////////////////////////////////////////////////  
-    case 2:
-      cout<<"Usuário, por favor digite um número ou zero para finalizar: ";
-      cin>>numero;
-      while (numero != 0)
-      {
-        insereNoFim(lista,numero);
-        cout<<"Usuário, por favor digite um número ou zero para finalizar: ";
-        cin>>numero;
-      }
-      cout<<"Lista preenchida!"<<endl;
-      break;
-    /////////////////////////////////////////////////////////////////////////////
-    case 3:
-      imprimeLista(lista);
-      cout<<endl;
-      break;
-    ///////////////////////////////////////////////////////////////////////////// 
-    case 4:
-      cout<<"O somatório dos elementos desta lista é "<<somatorioElementosLista(lista)<<endl;
-      cout<<endl;
-      break;
-    /////////////////////////////////////////////////////////////////////////////
-    case 5:
-      cout<<"Usuário, por favor digite um número para verificar se este se encontra na lista: ";
-      cin>>numero;
-      procuraElementoNaLista(lista,numero);
-      cout<<endl;
-      break;
-    /////////////////////////////////////////////////////////////////////////////
-    case 6:
-      int cont = 0;
-      bool retorno;
-      cout<<"Usuário, por favor digite um número para verificar se este se encontra na lista: ";
-      cin>>numero;
-      retorno = FuncaoprocuraElementosNaLista(lista,numero, cont);
-      if (retorno == true)
-      {
-        cout<<"Elemento encontrado na lista na posiçao "<<cont<<endl;
-        cout<<endl;
-      }
-
-      else
-      {
-        cout<<"Elemento não encontrado na lista!"<<endl;
-      }
-      cout<<endl;
-      break;
-    /////////////////////////////////////////////////////////////////////////////
-    case 7:
-      RemovePrimeiroElementoDaLista(lista);
-      cout<<endl;
-      break;
-    /////////////////////////////////////////////////////////////////////////////
-    case 8:
-      int cont = 0;
-      cont = contaElementosLista(lista);
-      cout<<"Lista lista tem "<<cont<<" elementos"<<endl;
-      cout<<endl;
-      break;
-    /////////////////////////////////////////////////////////////////////////////
-    case 9:
-      int posicao = 0;
-      cout<<"Informe uma posicao que o sistema vai retornar o número existente nela! ";
-      cin>>posicao;
-      devolvePosicaoNaLista(lista, posicao);
-      cout<<endl;
-      break;
-    /////////////////////////////////////////////////////////////////////////////
-    case 10:
-      int elemento = 0, posicao = 0;
-      cout<<"Qual elemento queres inserir na lista ";
-      cin>>elemento;
-      cout<<"Em qual posição você quer inserir ";
-      cin>>posicao;
-      InsereEmQualquerPosicao(lista, posicao, elemento);
-      cout<<endl;
-      break;
-    /////////////////////////////////////////////////////////////////////////////
-    case 11:
-      ListaParImpar(lista);
-      cout<<endl;
-      break;
-    /////////////////////////////////////////////////////////////////////////////
-    case 12:
-      corpoLista lista2;
-      cout<<"Usuário preencha uma segunda lista para a intercalação"<<endl;
-
-      cout<<"Usuário, por favor digite um número ou zero para finalizar: ";
-      cin>>numero;
-      while (numero != 0)
-      {
-        insereNoFim(lista2,numero);
-        cout<<"Usuário, por favor digite um número ou zero para finalizar: ";
-        cin>>numero;
-      }
-      cout<<"Lista preenchida!"<<endl;
-      IntercalaLista(lista,lista2);
-      break;
-    /////////////////////////////////////////////////////////////////////////////
-    case 13:
-      CrialistaVazia(lista);
-      cout<<"Lista reiniciada!"<<endl;
-      break;
-    /////////////////////////////////////////////////////////////////////////////
-    default:
-      cout<<"Opção inválida!! "<<endl;
-    }
-  } while (escolha != 0);
-}
