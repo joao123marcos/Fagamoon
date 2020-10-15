@@ -61,7 +61,8 @@ console.log(document.getElementById("novoID"));
 
 //14 - Vamos olhar novamente o que consigo acessar no elemento de id novoID
 console.log(document.getElementById("novoID"));
-// Parece que consigo acessar os atributos de estilo dele, lembram que o estilo entra junto da estrutura na formacao do DOM?
+// Parece que consigo acessar os atributos de estilo dele, 
+//lembram que o estilo entra junto da estrutura na formacao do DOM?
 // document.getElementById("novoID").style.color = "red";
 
 // 15 - Vamos explorar os metodos do elemento (ex. onclick)

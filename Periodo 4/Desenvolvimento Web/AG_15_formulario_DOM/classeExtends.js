@@ -8,19 +8,31 @@ class Pessoa{
     }
 }
 
-let JoaoMarcos = new Pessoa()
+class Aluno extends Pessoa{
+    constructor(){
+        super()
+    }
+    //metodo da classe aluno
+    imprimeNome(nomeAluno){
+        alert(`${nomeAluno}, bem vindo!`)
+    }
+}
+
+let joao = new Aluno()
 //criando a senha padrão para ser comparada com a que o usuário digitar depois
 const senhaPadrao = 'admin';
 //pegando os valores no evento do click
 document.getElementById("botaoEnviar").onclick = function(){
-    JoaoMarcos.senhaPessoa = document.getElementById("senha").value
-    if(JoaoMarcos.senhaPessoa === senhaPadrao){
-        JoaoMarcos.nomePessoa = document.getElementById("primeiroNome").value
-        JoaoMarcos.sobrenomePessoa = document.getElementById("sobrenome").value
-        JoaoMarcos.enderecoPessoa = document.getElementById("endereco").value
+    joao.senhaPessoa = document.getElementById("senha").value
+    if(joao.senhaPessoa === senhaPadrao){
+        //disparando o alerta com o nome do aluno
+        joao.imprimeNome(document.getElementById("primeiroNome").value)
+        joao.nomePessoa = document.getElementById("primeiroNome").value
+        joao.sobrenomePessoa = document.getElementById("sobrenome").value
+        joao.enderecoPessoa = document.getElementById("endereco").value
         
-        let recibo = `${JoaoMarcos.nomePessoa} ${JoaoMarcos.sobrenomePessoa},
-        sua matricula foi realizada com sucesso. Enviaremos para o endereço ${JoaoMarcos.enderecoPessoa}
+        let recibo = `${joao.nomePessoa} ${joao.sobrenomePessoa},
+        sua matricula foi realizada com sucesso. Enviaremos para o endereço ${joao.enderecoPessoa}
         o comprovante de sua matricula, obrigado!`
         //criando um novo nó dentro de minha estrutura (ou arvore hierarquica) DOM
         let paragrafo = document.createElement('p')
