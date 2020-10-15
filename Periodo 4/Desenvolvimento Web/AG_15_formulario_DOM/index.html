@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms JS</title>
+    <!--
+        defer diz ao navegador carregue todo html pra
+        depois carregar o arquivo .js
+    -->
+    <script src="classePessoa.js" defer></script>
+</head>
+<body>
+
+    <h1>Formulário de inscrição</h1>
+    
+    <form>
+        <label for="primeiroNome">Primeiro nome:</label><br>
+        <input type="text" id="primeiroNome" name="primeiroNome"><br>
+        <label for="sobrenome">Sobrenome:</label><br>
+        <input type="text" id="sobrenome" name="sobrenome"><br>
+        <label for="endereco">Endereço:</label><br>
+        <input type="text" id="endereco" name="endereco"><br>
+        <label for="senha">Senha:</label><br>
+        <input type="password" id="senha" name="senha"><br><br>
+        <input type="button" id="botaoEnviar" value="Enviar">
+    </form>
+
+
+</body>
+</html>
