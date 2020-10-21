@@ -26,8 +26,9 @@ document.getElementById("botaoEnviar").onclick = function(){
     joao.senhaPessoa = document.getElementById("senha").value
     if(joao.senhaPessoa === senhaPadrao){
         //disparando o alerta com o nome do aluno
-        joao.imprimeNome(document.getElementById("primeiroNome").value)
+        //joao.imprimeNome(document.getElementById("primeiroNome").value)
         joao.nomePessoa = document.getElementById("primeiroNome").value
+        joao.imprimeNome(joao.nomePessoa)
         joao.sobrenomePessoa = document.getElementById("sobrenome").value
         joao.enderecoPessoa = document.getElementById("endereco").value
         
@@ -43,7 +44,6 @@ document.getElementById("botaoEnviar").onclick = function(){
         /*assim como na linha de cima, nesta eu estou fazendo a mesma coisa. Estou dizendo que PARAGRAFO
         é filho (ou está inserido) dentro da tag body*/
         document.getElementsByTagName("body")[0].appendChild(paragrafo)
-        document.getElementById("paragrafo").style.color = "red"
     }
     else{
         alert('não podemos ir pro facebook')
