@@ -18,8 +18,8 @@
     if ($resultado -> num_rows > 0) {
         //enquanto houver linhas?
         while ($linha = $resultado -> fetch_assoc()) {
-            echo "Titulo da tarefa: " .$linha['titulo']. "<br> "."Descricao da tarefa:
-            ".$linha['decricao']."<br><br>";
+            echo "Titulo da tarefa: " .$linha['titulo']. 
+            "<br> "."Descricao da tarefa:".$linha['decricao']."<br><br>";
         }
     }
     
