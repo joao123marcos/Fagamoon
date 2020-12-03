@@ -1,0 +1,34 @@
+-----------Criando a tabela-------------------------
+CREATE TABLE pessoa(
+  idPessoa int unsigned NOT null AUTO_INCREMENT,
+  nomePessoa varchar(60),
+  sobrenomePessoa varchar(60),
+  idadePessoa int,
+  PRIMARY key(idPessoa)
+);
+-----------inserindo dados na table
+insert INTO pessoa(nomePessoa,sobrenomePessoa,idadePessoa)
+VALUES('João Marcos','Santos Pires',26);
+
+insert INTO pessoa(nomePessoa,sobrenomePessoa,idadePessoa)
+VALUES('Maria','Santos Pires',17);
+
+insert INTO pessoa(nomePessoa,sobrenomePessoa,idadePessoa)
+VALUES('Pedro','Santos Pires',20);
+
+insert INTO pessoa(nomePessoa,sobrenomePessoa,idadePessoa)
+VALUES('Ana','Santos Pires',18);
+
+---------Extraindo dados da tabela---------------
+SELECT * FROM pessoa;
+
+SELECT * FROM pessoa WHERE nomePessoa LIKE '%joao%';
+
+SELECT * FROM pessoa WHERE idadePessoa >= 20;
+
+
+
+
+
+
+

@@ -34,7 +34,9 @@
             if ($resultadoSQL) {
                 if ($resultadoSQL -> num_rows > 0) {
                     while ($linha = $resultadoSQL -> fetch_assoc()) {
-                        echo $linha['nomePessoa'];
+                        echo "ID: ".$linha['idPessoa']."<br> "."Nome Pessoa: ".$linha['nomePessoa']
+                        ."<br> ". "Sobrenome Pessoa: ".$linha['sobrenomePessoa']. "<br>". "Idade Pessoa: ".
+                        $linha['idadePessoa']."<br>";
                     }
                 }
             }
