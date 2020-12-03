@@ -18,19 +18,19 @@
     <h1>Exibindo o resultado recebido pelo servidor:</h1>
     <h2>
     <?php
-        /*session_start();
+        session_start();
         if (isset($_SESSION['email'])) {
             $email = $_SESSION['email'];
             $senha = $_SESSION['senha'];
             echo "O email enviado foi: $email <br> A senha enviada foi: $senha";  
-        }*/
+        }
 
-        if ((isset($_POST['email']) && $_POST['email'] != '') && (isset($_POST['senha']) && $_POST['senha'] != '')){
+        elseif ((isset($_POST['email']) && $_POST['email'] != '') && (isset($_POST['senha']) && $_POST['senha'] != '')){
             $email = $_POST['email'];
             $senha = $_POST['senha'];
 
-            //$_SESSION['email'] = $email;
-            //$_SESSION['senha'] = $senha;
+            $_SESSION['email'] = $email;
+            $_SESSION['senha'] = $senha;
 
             echo "O email enviado foi: $email <br> A senha enviada foi: $senha";
         }
