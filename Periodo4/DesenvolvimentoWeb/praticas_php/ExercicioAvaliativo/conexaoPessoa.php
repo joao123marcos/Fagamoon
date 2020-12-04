@@ -19,7 +19,7 @@
 
     <form method="post">
         <label for="sql">Digite o comando sql:</label>
-        <input type="text" name="SQL" id="sql">
+        <input type="text" name="sql">
         <input type="submit" value="ENVIAR">
     </form>
 
@@ -28,8 +28,8 @@
 
         $conexao = conexaoBanco();
         //verificando se a super global Post está setada e diferente de nulo
-       if (isset($_POST['SQL']) && $_POST['SQL'] != '') {
-            $consulta = $_POST['SQL'];
+       if (isset($_POST['sql']) && $_POST['sql'] != '') {
+            $consulta = $_POST['sql'];
             $resultadoSQL = $conexao -> query($consulta);
             if ($resultadoSQL) {
                 if ($resultadoSQL -> num_rows > 0) {
