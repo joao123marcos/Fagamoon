@@ -31,19 +31,14 @@
        if (isset($_POST['sql']) && $_POST['sql'] != '') {
             $consulta = $_POST['sql'];
             $resultadoSQL = $conexao -> query($consulta);
-            if ($resultadoSQL) {
-                if ($resultadoSQL->num_rows > 0) {
-                    while ($linha = $resultadoSQL -> fetch_assoc()) {
-                        echo "ID: ".$linha['idPessoa']."<br> "."Nome Pessoa: ".$linha['nomePessoa']
-                        ."<br> ". "Sobrenome Pessoa: ".$linha['sobrenomePessoa']. "<br>". "Idade Pessoa: ".
-                        $linha['idadePessoa']."<br>";
-                    }
-                }
+            while ($linha = $resultadoSQL -> fetch_assoc()) {
+                echo "ID: ".$linha['idPessoa']."<br> "."Nome Pessoa: ".$linha['nomePessoa']
+                    ."<br> ". "Sobrenome Pessoa: ".$linha['sobrenomePessoa']. "<br>". "Idade Pessoa: ".
+                    $linha['idadePessoa']."<br>";
             }
-            
-            
-        }
-        else {
+       }
+       
+       else {
             echo "Não foi informada nenhuma instrução SQL";
         }
         $conexao->close();
