@@ -30,3 +30,27 @@ public class Funcionario {
 	}
 
 }
+
+class gerente extends Funcionario{
+    private int qtd_funcionarios_gerencia = 0;
+	
+	
+	//construtor da subclasse gerente
+	gerente(String nomefuncionario, String cpfFunc, float salarioFunc, String endereco) {
+		super(nomefuncionario, cpfFunc, salarioFunc, endereco);
+		// TODO Auto-generated constructor stub
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+
