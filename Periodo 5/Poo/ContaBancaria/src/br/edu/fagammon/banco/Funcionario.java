@@ -1,3 +1,5 @@
+package br.edu.fagammon.banco;
+
 public class Funcionario {
 	protected String nome_funcionario;
 	protected String cpf_funcionario;
@@ -5,7 +7,7 @@ public class Funcionario {
 	protected String endereco;
 	
 	//Construtor da classe
-	Funcionario(String nomefuncionario, String cpfFunc, float salarioFunc, String endereco){
+	public Funcionario(String nomefuncionario, String cpfFunc, float salarioFunc, String endereco){
 		this.nome_funcionario = nomefuncionario;
 		this.cpf_funcionario = cpfFunc;
 		this.salario_funcionario = salarioFunc;
@@ -29,29 +31,13 @@ public class Funcionario {
 		return this.endereco;
 	}
 	
-	public double bonificacao() {
+	public double getBonificacao() {
 		return this.salario_funcionario * 0.1;
 	}
 
 }
 
-class gerente extends Funcionario{
-    private int qtd_funcionarios_gerencia = 0;
-	
-	
-	//construtor da subclasse gerente
-	gerente(String nomefuncionario, String cpfFunc, float salarioFunc, String endereco) {
-		super(nomefuncionario, cpfFunc, salarioFunc, endereco);
-		// TODO Auto-generated constructor stub
-	}
-	
-	
-	//Metodos da subclasse gerente
-	public double bonificacaoGerente() {
-		return super.
-	}
-	
-}
+
 
 
 

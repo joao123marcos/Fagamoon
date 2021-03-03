@@ -1,3 +1,6 @@
+package br.edu.fagammon.banco.main;
+import br.edu.fagammon.banco.*;
+
 import java.util.Scanner;
 
 public class Principal {
@@ -29,6 +32,8 @@ public class Principal {
         System.out.println("O salario desse funcionairo é "+ joao.getSalarioFuncionario());
         System.out.println(" ");
         System.out.println("O endereço desse funcionario é "+ joao.getEnderecoFuncionario());
+        System.out.println(" ");
+        System.out.println("Bonificação do funcionario "+ joao.getBonificacao());
         
         System.out.println(" ");
         System.out.println("Criando um gerente............");
@@ -45,13 +50,15 @@ public class Principal {
         System.out.println("Informe seu endereço");
         endereco = ler.next();
         
-        gerente maria = new gerente(nome_funcionario, cpf_funcionario, salario_funcionario, endereco);
+        Gerente maria = new Gerente(nome_funcionario, cpf_funcionario, salario_funcionario, endereco);
         
         System.out.println("O Nome do Gerente é "+ maria.getNomeFuncionario());
         System.out.println(" ");
         System.out.println("O salario desse Gerente é "+ maria.getSalarioFuncionario());
         System.out.println(" ");
         System.out.println("O endereço desse Gerente é "+ maria.getEnderecoFuncionario());
+        System.out.println(" ");
+        System.out.println("Bonificação do Gerente "+ maria.getBonificacao());
 		
 	}
 
