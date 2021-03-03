@@ -28,6 +28,10 @@ public class Funcionario {
 	public String getEnderecoFuncionario() {
 		return this.endereco;
 	}
+	
+	public double bonificacao() {
+		return this.salario_funcionario * 0.1;
+	}
 
 }
 
@@ -39,6 +43,12 @@ class gerente extends Funcionario{
 	gerente(String nomefuncionario, String cpfFunc, float salarioFunc, String endereco) {
 		super(nomefuncionario, cpfFunc, salarioFunc, endereco);
 		// TODO Auto-generated constructor stub
+	}
+	
+	
+	//Metodos da subclasse gerente
+	public double bonificacaoGerente() {
+		return super.
 	}
 	
 }
