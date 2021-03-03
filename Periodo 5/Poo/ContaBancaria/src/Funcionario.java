@@ -24,5 +24,9 @@ public class Funcionario {
 	public float getSalarioFuncionario() {
 		return this.salario_funcionario;
 	}
+	
+	public String getEnderecoFuncionario() {
+		return this.endereco;
+	}
 
 }
