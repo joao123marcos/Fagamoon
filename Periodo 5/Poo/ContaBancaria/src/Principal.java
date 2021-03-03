@@ -26,9 +26,9 @@ public class Principal {
         
         System.out.println("O Nome do Funcionario é "+ joao.getNomeFuncionario());
         System.out.println(" ");
-        System.out.println("O salario desse funcionairo é"+ joao.getSalarioFuncionario());
+        System.out.println("O salario desse funcionairo é "+ joao.getSalarioFuncionario());
         System.out.println(" ");
-        System.out.println("O endereço desse funcionario é"+ joao.getEnderecoFuncionario());
+        System.out.println("O endereço desse funcionario é "+ joao.getEnderecoFuncionario());
 		
 	}
 
