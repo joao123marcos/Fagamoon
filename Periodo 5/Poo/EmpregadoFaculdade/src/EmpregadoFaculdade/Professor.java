@@ -16,7 +16,11 @@ public class Professor extends EmpregadoFaculdade {
 	}
 	
 	public double getGastos() {
-		return (super.getGastos()) + (quatidade_aulas_ministradas * 10);
+		return (super.getGastos() + (this.quatidade_aulas_ministradas * 10));
+	}
+	
+	public String getInfo() {
+		return (super.getInfo() + " horas aulas "+(quatidade_aulas_ministradas * 10));
 	}
    
 }

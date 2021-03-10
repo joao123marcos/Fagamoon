@@ -30,7 +30,7 @@ public class ProgramaPrincipal {
 		joao.setQuatidade_aulas_ministradas(aulas_ministradas);
 		
 		relatorio.relatorio(joao);
-		System.out.println(joao.getInfo());
+		//System.out.println(joao.getInfo());
 		
 		
 		//System.out.println(" ");

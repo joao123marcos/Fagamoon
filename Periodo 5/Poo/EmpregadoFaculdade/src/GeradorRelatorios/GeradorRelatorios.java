@@ -4,8 +4,8 @@ import EmpregadoFaculdade.*;
 
 public class GeradorRelatorios {
    public void relatorio(EmpregadoFaculdade a){
-	   a.getGastos();
-	   a.getInfo();
-	   System.out.println("passou no gerador de relatorio");
+	   System.out.println(a.getGastos());
+	   System.out.println(a.getInfo());
+	   
    }
 }
