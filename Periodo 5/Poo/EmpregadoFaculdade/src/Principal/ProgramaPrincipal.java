@@ -52,7 +52,7 @@ public class ProgramaPrincipal {
 		
 		System.out.println(" ");
 		
-		relatorio.relatorio(maria);
+		
 
 		//System.out.println("Seu nome "+maria.getNome());
 		//System.out.println("Seu salario "+maria.getGastos());
