@@ -24,8 +24,6 @@ public class EmpregadoFaculdade {
 	}
 	
 	public String getInfo() {
-		return "Nome: "+ this.nome + " com salario "+this.salario;
+		return "Nome: "+ this.nome + " com salario base "+this.salario;
 	}
-    
-    
 }

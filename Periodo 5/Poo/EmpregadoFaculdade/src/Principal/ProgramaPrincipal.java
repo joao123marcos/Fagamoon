@@ -12,6 +12,7 @@ public class ProgramaPrincipal {
 		String nome;
 		double salario;
 		int aulas_ministradas;
+		int coordenacursos;
 		
 		System.out.println("Informe seu nome: ");
 		nome = ler.next();
@@ -56,7 +57,26 @@ public class ProgramaPrincipal {
 		//System.out.println("Seu nome "+maria.getNome());
 		//System.out.println("Seu salario "+maria.getGastos());
 		//System.out.println(" ");
-	  
+/////////////////////////////////////////////////////////////////////	  
+		System.out.println("Informe seu nome: ");
+		nome = ler.next();
+		System.out.println(" ");
+		System.out.println("Informe seu salario: ");
+		salario = ler.nextDouble();
+		System.out.println(" ");
+		System.out.println("Informe quantos cursos são coordenados: ");
+		coordenacursos = ler.nextInt();
+		System.out.println(" ");
+		System.out.println("Quantas aulas você ministrou? ");
+		aulas_ministradas = ler.nextInt();
+		
+		Diretor jose = new Diretor();
+		jose.setNome(nome);
+		jose.setSalario(salario);
+		jose.setCoordenacursos(coordenacursos);
+		jose.setQtd_aulas_ministradas(aulas_ministradas);
+		
+		relatorio.relatorio(jose);
 		
 
 	}
