@@ -15,7 +15,7 @@ public class Professor extends EmpregadoFaculdade {
 		this.quatidade_aulas_ministradas = quatidade_aulas_ministradas;
 	}
 	
-	//@overrite
+	//sobrescrita do metodo
 	public double getGastos() {
 		return (super.getGastos() + (this.quatidade_aulas_ministradas * 10));
 	}

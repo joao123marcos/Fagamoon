@@ -24,7 +24,7 @@ public class Diretor extends EmpregadoFaculdade {
 		this.coordenacursos = coordenacursos;
 	}
     
-	//@overrite
+	//sobrescrita do metodo
 	public double getGastos() {
 		return (super.getGastos()+ (this.qtd_aulas_ministradas*20));
 	}

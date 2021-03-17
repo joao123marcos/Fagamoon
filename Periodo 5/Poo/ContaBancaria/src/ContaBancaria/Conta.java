@@ -1,11 +1,12 @@
+package ContaBancaria;
 
 public class Conta {
-	
-	private double saldo;
-	private String nome;
-	private double limite;
-	private int numero;
+	//atributos da classe
+	protected double saldo;
+	protected String nome;
+	protected int numero;
 
+	//metodos da classe
 	public void deposita(double valor) {
 		this.saldo +=valor;
 	}
@@ -18,14 +19,6 @@ public class Conta {
 		this.nome = nome;
 	}
 
-	public double getLimite() {
-		return limite;
-	}
-
-	public void setLimite(double limite) {
-		this.limite = limite;
-	}
-
 	public int getNumero() {
 		return numero;
 	}
@@ -36,6 +29,10 @@ public class Conta {
 
 	public double getSaldo() {
 		return this.saldo;
+	}
+	
+	public void saca(double valor) {
+			this.saldo -= valor;	
 	}
 
 }
